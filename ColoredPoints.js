@@ -55,12 +55,38 @@ function connectVariablesToGLSL() {
 
 }
 
+let g_selectColor = [1.0, 1.0, 1.0, 1.0]; // Default color is white
+function addActionsForHtmlUI() {
+  //Button Events
+  //document.getElementById('green').onclick = function() { g_selectColor = [0.0, 1.0, 0.0, 1.0]; };
+  //document.getElementById('red').onclick =   function() { g_selectColor = [1.0, 0.0, 0.0, 1.0]; };
+
+  //Slider Events
+  document.getElementById('redSlider').addEventListener('mouseup', function() { 
+    g_selectColor[0] = this.value/100;
+    console.log(g_selectColor[0]);
+  });
+
+  document.getElementById('greenSlider').addEventListener('mouseup', function() {
+    g_selectColor[1] = this.value/100;
+    console.log(g_selectColor[1]);
+  } );    
+
+  document.getElementById('blueSlider').addEventListener('mouseup', function() {
+    g_selectColor[2] = this.value/100;
+    console.log(g_selectColor[2]);
+  } );  
+}
+
 function main() {
   //Set up canvas and gl variables
   setupWebGL();
   //set up GLSL shader programs and conenct GLSL variables 
   connectVariablesToGLSL()
  
+  //Set up actions for the HTML UI elements
+  addActionsForHtmlUI()
+
 
   // Register function (event handler) to be called on a mouse press
   canvas.onmousedown = click;
@@ -74,21 +100,27 @@ function main() {
 
 var g_points = [];  // The array for the position of a mouse press
 var g_colors = [];  // The array to store the color of a point
+
 function click(ev) {
   //Extract the event click and return it in WebGL coordinates
-  [x,y] = convertCoordinatesEventToGL(ev); 
+  let [x,y] = convertCoordinatesEventToGL(ev); 
 
   // Store the coordinates to g_points array
   g_points.push([x, y]);
 
+
+  g_colors.push(g_selectColor.slice()); // Store the color to g_colors array
   // Store the coordinates to g_points array
+  /*
   if (x >= 0.0 && y >= 0.0) {      // First quadrant
     g_colors.push([1.0, 0.0, 0.0, 1.0]);  // Red
   } else if (x < 0.0 && y < 0.0) { // Third quadrant
     g_colors.push([0.0, 1.0, 0.0, 1.0]);  // Green
   } else {                         // Others
     g_colors.push([1.0, 1.0, 1.0, 1.0]);  // White
-  }
+  }*/
+
+
   //Draw every shape that is supposed to be in the canvas
   renderAllShapes(); 
 }
