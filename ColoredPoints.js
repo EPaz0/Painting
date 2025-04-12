@@ -74,6 +74,7 @@ function addActionsForHtmlUI() {
   //Button Events
   //document.getElementById('green').onclick = function() { g_selectColor = [0.0, 1.0, 0.0, 1.0]; };
   //document.getElementById('red').onclick =   function() { g_selectColor = [1.0, 0.0, 0.0, 1.0]; };
+  document.getElementById('clearButton').onclick =   function() { g_shapesList = []; renderAllShapes(); };
 
   //Color Slider Events
   document.getElementById('redSlider').addEventListener('mouseup', function() { 
