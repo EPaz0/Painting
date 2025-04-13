@@ -68,6 +68,7 @@ function connectVariablesToGLSL() {
 //Constant
 const POINT = 0; // Point type
 const TRIANGLE = 1; // Triangle type
+const CIRCLE = 2; // Circle type
 
 
 //Global variables related to UI Elements
@@ -83,6 +84,7 @@ function addActionsForHtmlUI() {
   document.getElementById('clearButton').onclick =   function() { g_shapesList = []; renderAllShapes(); };
   document.getElementById('pointButton').onclick =   function() { g_selectedType = POINT };
   document.getElementById('triButton').onclick =   function() { g_selectedType = TRIANGLE };
+  document.getElementById('circleButton').onclick =   function() { g_selectedType = CIRCLE };
 
 
   //Color Slider Events
@@ -145,8 +147,10 @@ function click(ev) {
   let point;
   if(g_selectedType == POINT){
     point = new Point(); // Create a point object
-  }else{
+  }else if(g_selectedType == TRIANGLE){
     point = new Triangle(); // Create a triangle object
+  }else if(g_selectedType == CIRCLE){
+    point = new Circle(); // Create a circle object
   }
   point.position=[x, y];
   point.color = g_selectedColor.slice(); 
