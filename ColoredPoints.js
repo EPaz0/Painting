@@ -75,6 +75,7 @@ const CIRCLE = 2; // Circle type
 let g_selectedColor = [1.0, 1.0, 1.0, 1.0]; // Default color is white
 let g_selectedSize = 5; // Default size is 10.0
 let g_selectedType = POINT; // Default type is point
+let g_selectedSegments = 10; // Default segments for circle is 10
 
 //Add actions for HTML UI elements
 function addActionsForHtmlUI() {
@@ -106,6 +107,11 @@ function addActionsForHtmlUI() {
   //Size Slider Events  
   document.getElementById('sizeSlider').addEventListener('mouseup', function() {
     g_selectedSize = this.value;
+  });
+
+  //Segements Slider Events
+  document.getElementById('segmentSlider').addEventListener('mouseup', function() {
+    g_selectedSegments = this.value;
   });
 
 }
@@ -151,6 +157,7 @@ function click(ev) {
     point = new Triangle(); // Create a triangle object
   }else if(g_selectedType == CIRCLE){
     point = new Circle(); // Create a circle object
+    point.segments = g_selectedSegments; // Set the number of segments for the circle
   }
   point.position=[x, y];
   point.color = g_selectedColor.slice(); 
