@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -6,6 +7,7 @@
   </head>
 
   <body onload="main()">
+    <p>Added: color preview, shape placement preview on cursor, and triangle rotation slider</p>
     <canvas id="webgl" width="400" height="400">
     Please use a browser that supports "canvas"
     </canvas>
@@ -24,6 +26,9 @@
       <button type="button" id = "circleButton">Circle</button>
     <p>
     Shape Color:
+
+    <div style="display: flex; align-items: center;"></div>
+      <div id="colorPreview" style="width: 40px; height: 40px; border: 1px solid #ccc; margin-right: 10px;"></div>
     <p></p>
     Red <input type = "range" min = "0" max = "100" value = "100" class = "slider" id = "redSlider">
     <p>
@@ -34,7 +39,9 @@
     Size <input type = "range" min = "5" max = "40" value = "0" class = "slider" id = "sizeSlider">     
     (Circles) Segment Count: <input type = "range" min = "3" max = "40" value = "0" class = "slider" id = "segmentSlider">
     <p>
-
+    Triangle Rotation (Degrees): <input type="range" min="0" max="360" value="0" id="rotationSlider">
+    <p>
+      <button id="drawSketchButton">Draw My Triangle Art</button>
 
     <script src="lib/webgl-utils.js"></script>
     <script src="lib/webgl-debug.js"></script>

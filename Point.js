@@ -13,7 +13,8 @@ class Point{
       // var xy = g_points[i];
       // var rgba = g_colors[i];
       // var size = g_sizes[i];
-  
+      
+
         //Quit using the buffer to send the attribute
         gl.disableVertexAttribArray(a_Position);
         //gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([xy[0],xy[1]]), gl.DYNAMIC_DRAW);

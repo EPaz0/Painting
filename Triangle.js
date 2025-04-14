@@ -4,6 +4,7 @@ class Triangle{
       this.position = [0.0, 0.0, 0.0];
       this.color = [1.0, 1.0, 1.0, 1.0]; // Default color is white
       this.size = 5.0; 
+      this.rotation = 0;
     }
     render(){
       var xy = this.position;
@@ -23,10 +24,34 @@ class Triangle{
       // Pass the size of a point to u_Size variable
       gl.uniform1f(u_Size, size);
   
+      
+      let angle = this.rotation * Math.PI / 180; // convert to radians
+      let sinA = Math.sin(angle);
+      let cosA = Math.cos(angle);
+
       // Draw
       //gl.drawArrays(gl.POINTS, 0, 1);
       var d = this.size / 200.0;
-      drawTriangle([xy[0], xy[1], xy[0] + d, xy[1], xy[0], xy[1] + d]);
+      // Local vertices centered at origin
+      let localVerts = [
+        0.0, 0.0,
+        d, 0.0,
+        0.0, d
+      ];
+
+      // Rotate and translate vertices
+      let transformedVerts = [];
+      for (let i = 0; i < localVerts.length; i += 2) {
+        let x = localVerts[i];
+        let y = localVerts[i + 1];
+
+        let xRot = x * cosA - y * sinA;
+        let yRot = x * sinA + y * cosA;
+
+        transformedVerts.push(xRot + xy[0], yRot + xy[1]);
+      }
+
+drawTriangle(transformedVerts);
     }
   }
 
